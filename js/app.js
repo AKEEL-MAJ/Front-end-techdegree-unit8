@@ -5,7 +5,6 @@
 
 const lBox = document.querySelector('.l-box');
 const box = document.querySelector('.box');
-const closeBox = document.querySelector('.close-box');
 const main = document.querySelector('.main');
 let employees = [];
 let container;
@@ -14,13 +13,13 @@ let index;
 
 
 fetch('https://randomuser.me/api/?results=12&nat=US')
-  .then((data) => data.json())  
+  .then((data) => data.json())
   .then((res) => res.results)
   .then((data) => employeesList(data))
   .catch(error => alert(error))
 
 
-  
+
 function employeesList(employeeData){
 
   employees = employeeData;
@@ -43,7 +42,7 @@ function employeesList(employeeData){
           </div>
       </div>
     `;
-    
+
 	});
 
   main.innerHTML = containerHTML;
@@ -57,10 +56,10 @@ function lightBox(index){
 	let { name, dob, phone, email, location: { city, street, state, postcode}, picture } = employees[index];
 
 	let date = new Date(dob.date);
-	year = date.getFullYear().toString().substring(1,3);
+  year = date.getFullYear().toString().substring(1,3);
 
   const boxHTML = `
-    <span class="close-box">X</span> 
+    <span class="close-box">X</span>
 		<img class="box-image" src="${picture.large} " />
 		<div>
 			<h2 class="box-name">${name.first} ${name.last}</h2>
@@ -71,13 +70,14 @@ function lightBox(index){
 			<p class="address"> ${street.number} ${street.name}, ${state} ${postcode}</p>
 			<p>Birthday: ${date.getMonth()}/${date.getDate()}/${year}</p>
 		</div>
-	`;
+  `;
 
   lBox.classList.remove("hidden");
-  
   box.innerHTML = boxHTML;
- 
+  const closeBox = document.querySelector('.close-box');
 }
+
+
 
 
 lBox.style.display = 'none';
