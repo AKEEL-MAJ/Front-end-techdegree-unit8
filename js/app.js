@@ -50,6 +50,8 @@ function employeesList(employeeData){
 }
 
 
+lBox.style.display = 'none';
+
 
 function lightBox(index){
 
@@ -75,31 +77,29 @@ function lightBox(index){
   lBox.classList.remove("hidden");
   box.innerHTML = boxHTML;
   const closeBox = document.querySelector('.close-box');
+
+  closeBox.addEventListener('click', () => {
+    lBox.classList.add("hidden");
+    lBox.style.display = 'none';
+  });
+
 }
-
-
-
-
-lBox.style.display = 'none';
 
 
 main.addEventListener('click', e => {
 
 	if (e.target !== main) {
+    
+    lBox.style.display = 'flex';
 
 		const container = e.target.closest(".container");
 		const index = container.getAttribute('index');
     lightBox(index);
-
-    lBox.style.display = 'flex';
-
 	}
 
+
 });
 
 
 
-closeBox.addEventListener('click', () => {
-  lBox.classList.add("hidden");
-  box.style.display = 'none';
-});
+
